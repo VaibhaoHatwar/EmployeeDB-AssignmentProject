@@ -1,14 +1,17 @@
-import axios from "axios"
-
-const API_URL = "https://retoolapi.dev/B13laa/"
+import retoolApi from "../../common/apis/retoolApi"
+import { GetAuthUsersAPIKey } from "../../common/apis/retoolApiKey"
 
 // Login user
 const login = async (userData) => {
-  const response = await axios.get(API_URL + "getusers?", userData)
+  const response = await retoolApi.get(
+    `/${GetAuthUsersAPIKey}/getusers?user_id=${userData.user_id}&password=${userData.password}`
+  )
 
   if (response.data) {
     localStorage.setItem("user", JSON.stringify(response.data))
   }
+
+  console.log(response)
 
   return response.data
 }

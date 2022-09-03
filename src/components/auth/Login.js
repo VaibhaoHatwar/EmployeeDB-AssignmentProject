@@ -26,7 +26,7 @@ const Login = () => {
       toast.error(message)
     }
 
-    if (isSuccess || user) {
+    if (isSuccess && user.length) {
       navigate("/")
     }
 
@@ -43,14 +43,16 @@ const Login = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault()
 
-    if (password.length < 6) {
-      throw Error("Password must be atleast 6 characters long")
-    }
+    // if (password.length < 6) {
+    //   throw Error("Password must be atleast 6 characters long")
+    // }
 
     const userData = {
       user_id,
       password,
     }
+
+    console.log(userData)
 
     dispatch(login(userData))
   }

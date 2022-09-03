@@ -15,12 +15,15 @@ const initialState = {
 // login user
 export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   try {
+    console.log("AuthSlice user data", user)
+    console.log("AuthSlice thu", thunkAPI)
     return await authService.login(user)
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
       error.message ||
       error.toString()
+
     return thunkAPI.rejectWithValue(message)
   }
 })

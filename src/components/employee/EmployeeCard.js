@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 const EmployeeCard = ({ employee }) => {
+  // const {id} = useParams()
   const { id, name, company, company_logo, designation } = employee
 
   return (
@@ -8,7 +9,11 @@ const EmployeeCard = ({ employee }) => {
       <div className="row g-0">
         <div className="col-4 my-auto">
           <img
-            src={company_logo ? company_logo : ""}
+            src={
+              company_logo
+                ? company_logo
+                : "https://via.placeholder.com/120.png"
+            }
             className="img-fluid rounded ms-2"
             alt="logo"
           />
@@ -22,7 +27,7 @@ const EmployeeCard = ({ employee }) => {
             <h6 className="card-subtitle mb-2 text-primary">
               {designation ? designation : ""}
             </h6>
-            <Link to className="btn btn-info btn-sm" id={id}>
+            <Link to={`/employee/${id}`} className="btn btn-info btn-sm">
               view more
             </Link>
           </div>

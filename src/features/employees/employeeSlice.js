@@ -14,8 +14,6 @@ export const getAllEmployees = createAsyncThunk(
   "employees/getAll",
   async (_, thunkAPI) => {
     try {
-      // const token = thunkAPI.getState().auth.user.token
-      // return await employeeService.getEmployees(token)
       return await employeeService.getEmployees()
     } catch (error) {
       const message =
@@ -34,8 +32,6 @@ export const getEmployeeDetail = createAsyncThunk(
   "employees/:id",
   async (id, thunkAPI) => {
     try {
-      //   const token = thunkAPI.getState().auth.user.token
-      //   return await employeeService.getEmployeeDetail(id, token)
       return await employeeService.getEmployeeDetail(id)
     } catch (error) {
       const message =

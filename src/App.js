@@ -4,7 +4,6 @@ import "react-toastify/dist/ReactToastify.css"
 
 import Login from "./components/auth/Login"
 import EmployeeDetail from "./components/employee/EmployeeDetail"
-import Footer from "./components/layout/Footer"
 import Header from "./components/layout/Header"
 import Home from "./components/pages/Home"
 import NotFound from "./components/pages/NotFound"
@@ -20,7 +19,6 @@ function App() {
           <Route path="/employee/:id" element={<EmployeeDetail />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
-        <Footer />
       </Router>
       <ToastContainer />
     </>

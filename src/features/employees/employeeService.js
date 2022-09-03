@@ -1,11 +1,11 @@
-import employeeApi from "../../common/apis/employeeApi"
+import retoolApi from "../../common/apis/retoolApi"
 import {
   EmployeeDetailAPIKey,
   GetEmployeesAPIKey,
-} from "../../common/apis/employeeApiKey"
+} from "../../common/apis/retoolApiKey"
 
 const getEmployees = async () => {
-  const response = await employeeApi
+  const response = await retoolApi
     .get(
       `${GetEmployeesAPIKey}/getemployees
   `
@@ -18,14 +18,10 @@ const getEmployees = async () => {
 }
 
 const getEmployeeDetail = async (id) => {
-  // const response = await axios.get(
-  //   "https://retoolapi.dev/H2F0Ui/getemployedetail?id=" + id
-  // )
-
   // return response.data
-  const response = await employeeApi
+  const response = await retoolApi
     .get(
-      `${EmployeeDetailAPIKey}/getemployees?id=${id}
+      `${EmployeeDetailAPIKey}/getemployedetail?id=${id}
   `
     )
     .catch((error) => {
