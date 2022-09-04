@@ -1,11 +1,13 @@
-import { Link, useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const EmployeeCard = ({ employee }) => {
-  // const {id} = useParams()
   const { id, name, company, company_logo, designation } = employee
 
   return (
-    <div className="col-md-4 card mb-3 my-0 py-0" style={{ maxWidth: "540px" }}>
+    <div
+      className="col-md-4 card mb-3 mx-auto my-0 py-0"
+      style={{ maxWidth: "540px" }}
+    >
       <div className="row g-0">
         <div className="col-4 my-auto">
           <img
@@ -19,7 +21,7 @@ const EmployeeCard = ({ employee }) => {
           />
         </div>
         <div className="col-8">
-          <div className="card-body ms-2">
+          <div className="card-body">
             <h5 className="card-title">{name ? name : ""}</h5>
             <h6 className="card-subtitle mb-2 text-muted">
               {company ? company : ""}

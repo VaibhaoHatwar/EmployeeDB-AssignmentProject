@@ -2,17 +2,27 @@ import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import EmployeeListing from "../employee/EmployeeListing"
+import { reset } from "../../features/auth/authSlice"
 
 const Home = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-  const { user } = useSelector((state) => state.auth)
+  const { user, isError, message } = useSelector((state) => state.auth)
 
   useEffect(() => {
+    if (isError) {
+      console.log(message)
+    }
+
     if (!user) {
       navigate("/login")
     }
-  }, [user, navigate])
+
+    return () => {
+      dispatch(reset())
+    }
+  }, [user, navigate, message, dispatch])
 
   return (
     <main className="container">

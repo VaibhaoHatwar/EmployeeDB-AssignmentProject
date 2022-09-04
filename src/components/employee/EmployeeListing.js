@@ -12,8 +12,12 @@ const EmployeeListing = () => {
   )
 
   useEffect(() => {
+    if (isError) {
+      console.log(message)
+    }
+
     dispatch(getAllEmployees())
-  }, [])
+  }, [isError, message, dispatch])
 
   if (isLoading) {
     return <Spinner />
@@ -22,13 +26,10 @@ const EmployeeListing = () => {
   return (
     <Fragment>
       {employees.length > 0 ? (
-        <div className="row">
-          {employees.map(
-            (employee) => (
-              <EmployeeCard key={employee.id} employee={employee} />
-            )
-            // console.log(employee)
-          )}
+        <div className="row g-2">
+          {employees.map((employee) => (
+            <EmployeeCard key={employee.id} employee={employee} />
+          ))}
         </div>
       ) : (
         <h3>You have not set any employees</h3>

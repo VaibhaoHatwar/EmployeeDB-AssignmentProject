@@ -43,9 +43,13 @@ const Login = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault()
 
-    // if (password.length < 6) {
-    //   throw Error("Password must be atleast 6 characters long")
-    // }
+    if (password.length < 6) {
+      toast.error("Password must be atleast 6 characters long")
+    }
+
+    if (!user_id || !password) {
+      toast.error("All fields must be required.")
+    }
 
     const userData = {
       user_id,
@@ -55,6 +59,11 @@ const Login = () => {
     console.log(userData)
 
     dispatch(login(userData))
+
+    setFormData({
+      user_id: "",
+      password: "",
+    })
   }
 
   if (isLoading) {

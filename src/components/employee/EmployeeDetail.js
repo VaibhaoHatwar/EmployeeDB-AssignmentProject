@@ -1,69 +1,74 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { getEmployeeDetail } from "../../features/employees/employeeSlice"
 import Spinner from "../layout/Spinner"
 
 const EmployeeDetail = () => {
   const { id } = useParams()
-  //     id	1
-  // name	"Aigneis Whisker"
-  // rating	"⭐️"
-  // company	"Procter & Gamble"
-  // interests	"Writing"
-  // view_more	"https://www.dyndns.org"
-  // designation	"Sales Engineer"
-  // company_logo	"https://logo.clearbit.com/illinois.edu"
-  // job_descripton	"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-
-  console.log(id)
 
   const dispatch = useDispatch()
 
-  // const { employees, isLoading, isError, message } = useSelector(
-  //   (state) => state.employees
-  // )
-
-  // const {
-  //   name,
-  //   rating,
-  //   company,
-  //   interests,
-  //   view_more,
-  //   designation,
-  //   company_logo,
-  //   job_description,
-  // } = employees
+  const { employees, isLoading, isError, message } = useSelector(
+    (state) => state.employees
+  )
 
   useEffect(() => {
-    dispatch(getEmployeeDetail(id))
-    console.log(getEmployeeDetail(id))
-  }, [])
+    if (isError) {
+      console.log(message)
+    }
 
-  // employees.map((item) => {
-  //   console.log(item)
-  // })
-  // if (isLoading) {
-  //   return <Spinner />
-  // }
+    dispatch(getEmployeeDetail(id))
+  }, [isError, message, dispatch])
+
+  if (isLoading) {
+    return <Spinner />
+  }
 
   return (
-    <div className="card col-md-8">
-      {/* <div className="card-body">
-        <h5 className="card-title">Name: {name ? name : ""}</h5>
-        <p className="card-text">Rating: {rating ? rating : ""}</p>
-        <h6 className="card-subtitle mb-2 text-muted">
-          Card Company: {company ? company : ""}
-        </h6>
-        <p>Interests: {interests ? interests : ""}</p>
-        <a href={view_more} className="card-link">
-          View more
-        </a>
-        <p>Designation: {designation ? designation : ""}</p>
-        <img src={company_logo} alt="" />
-        <p className="card-text">Job description: {job_description}</p>
-      </div> */}
-    </div>
+    <article className="container">
+      <section className="my-4 text-center">
+        <h1 className="Display-1 mb-2">Employee Details:</h1>
+        <p className="lead">Welcome to employee details page.</p>
+      </section>
+      <section className="card col-md-8 mx-auto">
+        {employees &&
+          employees.map((item) => (
+            <div key={item.id}>
+              <div className="card-body">
+                <h5 className="card-title display-6">
+                  Name: {item.name ? item.name : ""}
+                </h5>
+                <p className="lead">Rating: {item.rating ? item.rating : ""}</p>
+                <h6 className="card-subtitle mb-2 text-muted lead">
+                  Card Company: {item.company ? item.company : ""}
+                </h6>
+                <p className="lead">
+                  Interests: {item.interests ? item.interests : ""}
+                </p>
+                <a
+                  href={item.view_more ? item.view_more : ""}
+                  className="card-link"
+                >
+                  View more
+                </a>
+                <p className="lead">
+                  Designation: {item.designation ? item.designation : ""}
+                </p>
+                <img src={item.company_logo ? item.company_logo : ""} alt="" />
+                <p className="card-text lead">
+                  Job description:
+                  {item.job_description ? item.job_description : ""}
+                </p>
+
+                <p className="lead">
+                  <Link to="/">Back To Home</Link>
+                </p>
+              </div>
+            </div>
+          ))}
+      </section>
+    </article>
   )
 }
 
