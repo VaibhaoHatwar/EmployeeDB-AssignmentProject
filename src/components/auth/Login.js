@@ -56,8 +56,6 @@ const Login = () => {
       password,
     }
 
-    console.log(userData)
-
     dispatch(login(userData))
 
     setFormData({
