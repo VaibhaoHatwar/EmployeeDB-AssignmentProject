@@ -5,7 +5,7 @@ const EmployeeCard = ({ employee }) => {
 
   return (
     <div
-      className="col-md-4 card mb-3 mx-auto my-0 py-0"
+      className="col-md-3 mx-2 g-1 card mb-3 mx-auto my-0 py-0"
       style={{ maxWidth: "540px" }}
     >
       <div className="row g-0">
@@ -21,7 +21,7 @@ const EmployeeCard = ({ employee }) => {
           />
         </div>
         <div className="col-8">
-          <div className="card-body">
+          <div className="card-body ms-2">
             <h5 className="card-title">{name ? name : ""}</h5>
             <h6 className="card-subtitle mb-2 text-muted">
               {company ? company : ""}

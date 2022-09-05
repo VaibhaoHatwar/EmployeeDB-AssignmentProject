@@ -11,7 +11,7 @@ const Header = () => {
   const onLogoutHandler = () => {
     dispatch(logout())
     dispatch(reset())
-    localStorage.clear()
+
     navigate("/login")
   }
 
@@ -34,7 +34,7 @@ const Header = () => {
                   className="btn btn-warning"
                   to="/login"
                 >
-                  <FaSignInAlt className="me-1" />
+                  <FaSignOutAlt className="me-1" />
                   Logout
                 </button>
               ) : (

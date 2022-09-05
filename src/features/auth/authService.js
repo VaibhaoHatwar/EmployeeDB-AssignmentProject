@@ -3,20 +3,20 @@ import { GetAuthUsersAPIKey } from "../../common/apis/retoolApiKey"
 
 // Login user
 const login = async (userData) => {
-  const response = await retoolApi.get(
+  let result = await retoolApi.get(
     `/${GetAuthUsersAPIKey}/getusers?user_id=${userData.user_id}&password=${userData.password}`
   )
 
-  if (response.data) {
-    localStorage.setItem("user", JSON.stringify(response.data))
-    console.log("local user in auth service", response.data)
+  if (result.data[0].name) {
+    localStorage.setItem("user", JSON.stringify(result.data))
   }
-  return response.data
+
+  return result.data
 }
 
 // Logout user
 const logout = () => {
-  localStorage.removeItem("user")
+  localStorage.clear()
 }
 
 const authService = {

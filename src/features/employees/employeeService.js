@@ -5,7 +5,7 @@ import {
 } from "../../common/apis/retoolApiKey"
 
 const getEmployees = async () => {
-  const response = await retoolApi
+  const result = await retoolApi
     .get(
       `${GetEmployeesAPIKey}/getemployees
   `
@@ -14,12 +14,12 @@ const getEmployees = async () => {
       console.log(error)
     })
 
-  return response.data
+  return result.data
 }
 
 const getEmployeeDetail = async (id) => {
-  // return response.data
-  const response = await retoolApi
+  // return result.data
+  const result = await retoolApi
     .get(
       `${EmployeeDetailAPIKey}/getemployedetail?id=${id}
   `
@@ -28,7 +28,7 @@ const getEmployeeDetail = async (id) => {
       console.log(error)
     })
 
-  return response.data
+  return result.data
 }
 
 const employeeService = {
