@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { toast, ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 import LoginForm from "./components/auth/LoginForm"
 import EmployeeDetail from "./components/employee/EmployeeDetail"
@@ -18,6 +20,7 @@ function App() {
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </Router>
+      <ToastContainer />
     </>
   )
 }

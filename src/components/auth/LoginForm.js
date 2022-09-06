@@ -1,9 +1,37 @@
+import { useEffect } from "react"
 import { Formik } from "formik"
-// import * as EmailValidator from "email-validator"
 import * as Yup from "yup"
 import { FaSignInAlt } from "react-icons/fa"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
+import { login, reset } from "../../features/auth/authSlice"
+import Spinner from "../layout/Spinner"
 
 const LoginForm = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  )
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message)
+    }
+
+    if (isSuccess || user) {
+      navigate("/")
+    }
+
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
+  if (isLoading) {
+    return <Spinner />
+  }
+
   return (
     <div className="container my-4">
       <section className="col-md-6 mx-auto text-center">
@@ -17,8 +45,11 @@ const LoginForm = () => {
         <Formik
           initialValues={{ user_id: "", password: "" }}
           onSubmit={(values, { setSubmitting }) => {
-            console.log("Submitting")
-            console.log(values)
+            setSubmitting("Submitting")
+            if (!user) {
+              toast.error("Please enter correct credentials")
+            }
+            dispatch(login(values))
           }}
           validationSchema={Yup.object().shape({
             user_id: Yup.string().email().required("User ID is required"),
@@ -27,30 +58,9 @@ const LoginForm = () => {
               .min(8, "Password is too short - should be 8 characgters minimum")
               .matches(
                 /^[a-z0-9_]+$/i,
-                "Invalid password. Must contain one number and one special character"
+                "Invalid password. Password must contain atleast 1 number and 1 of this (!@#$%^&*_) special character"
               ),
           })}
-          // validate={(values) => {
-          //   let errors = {}
-
-          //   if (!values.user_id) {
-          //     errors.user_id = "User ID is required"
-          //   } else if (!EmailValidator.validate(values.user_id)) {
-          //     errors.user_id = "Invalid User ID"
-          //   }
-
-          //   const passwordRegex = "/^[a-z0-9_]+$/i"
-
-          //   if (!values.password) {
-          //     errors.password = "Password is required"
-          //   } else if (values.password < 8) {
-          //     errors.password = "Password must be 8 characters long"
-          //   } else if (!passwordRegex.test(values.password)) {
-          //     errors.password =
-          //       "Invalid password. Must contain one number and one special character"
-          //   }
-          // }
-          // }
         >
           {(props) => {
             const {

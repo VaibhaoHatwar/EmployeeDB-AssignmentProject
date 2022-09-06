@@ -27,8 +27,10 @@ const Home = () => {
   return (
     <main className="container">
       <section className="my-4 text-center">
-        <h1 className="Display-1 mb-2">Welcome User</h1>
-        <p className="lead">Welcome to the Employee Directory</p>
+        <h1 className="Display-1 mb-2">EmployeeDB</h1>
+        <p className="lead fw-semibold text-muted">
+          Welcome's you to the Employee Directory
+        </p>
       </section>
       <section>
         <EmployeeListing />
