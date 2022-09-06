@@ -19,7 +19,7 @@ const EmployeeDetail = () => {
     }
 
     dispatch(getEmployeeDetail(id))
-  }, [isError, message, dispatch])
+  }, [id, isError, message, dispatch])
 
   if (isLoading) {
     return <Spinner />

@@ -22,7 +22,7 @@ const Home = () => {
     return () => {
       dispatch(reset())
     }
-  }, [user, navigate, message, dispatch])
+  }, [user, isError, navigate, message, dispatch])
 
   return (
     <main className="container">
